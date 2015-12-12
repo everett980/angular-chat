@@ -1,15 +1,17 @@
 var express= require('express')
 var app = express();
+var path = require('path');
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 // app.use('/socketConfig.js', express.static(__dirname+'/socketConfig.js'));
-app.use('/public', express.static(__dirname+'/public'));
-app.use('/node_modules', express.static(__dirname+'/node_modules'));
+app.use('/public', express.static(path.normalize(__dirname+'/../public')));
+app.use('/node_modules', express.static(path.normalize(__dirname+'/../node_modules')));
+app.use('/browser', express.static(path.normalize(__dirname+'/../browser')));
 
 app.get('/', function(req, res, next) {
-		res.sendFile(__dirname+'/index.html');
+		res.sendFile(path.normalize(__dirname+'/../browser/html/index.html'));
 });
 
 
